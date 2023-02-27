@@ -14,7 +14,7 @@ jobs:
           TargetWorkspaceName: 'synw-testing-uat-001'
           TemplateFile: './synw-testing-dev-001/TemplateForWorkspace.json'
           ParametersFile: './synw-testing-dev-001/TemplateParametersForWorkspace.json'
-          OverrideArmParameters: './path of the parameters.yaml'
+          OverrideArmParameters: ''
           environment: 'UAT'
           resourceGroup: 'rg-testing-uat-001'
           clientId: ${{secrets.CLIENTID}}

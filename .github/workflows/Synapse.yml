@@ -10,17 +10,17 @@ jobs:
         # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
         - uses: actions/checkout@v2
         - uses: azure/synapse-workspace-deployment@release-1.0
-        with:
-          clientId: ${{secrets.CLIENTID}}
-          clientSecret:  ${{secrets.CLIENTSECRET}}
-          subscriptionId: ${{secrets.SUBSCRIPTIONID}}
-          tenantId: ${{secrets.TENANTID}}
-          TargetWorkspaceName: 'synw-testing-uat-001'
-          TemplateFile: './synw-testing-dev-001/TemplateForWorkspace.json'
-          ParametersFile: './synw-testing-dev-001/TemplateParametersForWorkspace.json'
-          OverrideArmParameters: ''
-          environment: 'UAT'
-          resourceGroup: 'rg-testing-uat-001'
+    with:
+      clientId: ${{secrets.CLIENTID}}
+      clientSecret:  ${{secrets.CLIENTSECRET}}
+      subscriptionId: ${{secrets.SUBSCRIPTIONID}}
+      tenantId: ${{secrets.TENANTID}}
+      TargetWorkspaceName: 'synw-testing-uat-001'
+      TemplateFile: './synw-testing-dev-001/TemplateForWorkspace.json'
+      ParametersFile: './synw-testing-dev-001/TemplateParametersForWorkspace.json'
+      OverrideArmParameters: ''
+      environment: 'UAT'
+      resourceGroup: 'rg-testing-uat-001'
          
-          DeleteArtifactsNotInTemplate: 'true'
-          managedIdentity: 'False'
+      DeleteArtifactsNotInTemplate: 'true'
+      managedIdentity: 'False'

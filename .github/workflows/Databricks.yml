@@ -1,0 +1,65 @@
+
+name: Import Notebook to Databricks New
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+
+env:
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+  # DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+jobs:
+  import_notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install azure-cli
+  # You may pin to the exact commit or the version.
+  # uses: pietrobolcato/install-azure-cli-action@f01ae8ab9274a69a854ef40018c9686d60d4891e
+      uses: pietrobolcato/install-azure-cli-action@v1
+
+    - name: Login to Azure
+      run: |
+         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+         az account set --subscription $ARM_SUBSCRIPTION_ID
+    - name: Install Databricks CLI
+      run: |
+        pip install databricks-cli
+    - name: Get AAD token
+      id: aad_token
+      run: |
+        access_token=$(az account get-access-token --resource https://management.azure.com --query accessToken -o tsv)
+        echo $access_token > /tmp/access_token
+        echo "export DATABRICKS_TOKEN=$(cat /tmp/access_token)"
+        cat /tmp/access_token
+        echo "$access_token"
+    - name: Configure Databricks CLI
+      run: |
+        export DATABRICKS_TOKEN= "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIyZmY4MTRhNi0zMzA0LTRhYjgtODVjYi1jZDBlNmY4NzljMWQiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hYTUyMmM1YS04NDA3LTRkOTctODI4Yy1mZjRjYjQ1NTc0MTYvIiwiaWF0IjoxNjc4MTQ0MTc4LCJuYmYiOjE2NzgxNDQxNzgsImV4cCI6MTY3ODE0ODA3OCwiYWlvIjoiRTJaZ1lFZzNWZG1mNmhzcHYvdVBNYmZmOC9NQ0FBPT0iLCJhcHBpZCI6IjUzNDZjOTVhLTFkYWQtNDA3YS04ZmJkLTcxNzVhZThhYzllNiIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2FhNTIyYzVhLTg0MDctNGQ5Ny04MjhjLWZmNGNiNDU1NzQxNi8iLCJvaWQiOiJlYTJkZWJiNy1jNTI4LTRlZGQtYjhlNC01ODBiZjQxNzk3MDciLCJyaCI6IjAuQVVvQVdpeFNxZ2VFbDAyQ2pQOU10RlYwRnFZVS1DOEVNN2hLaGN2TkRtLUhuQjJKQUFBLiIsInN1YiI6ImVhMmRlYmI3LWM1MjgtNGVkZC1iOGU0LTU4MGJmNDE3OTcwNyIsInRpZCI6ImFhNTIyYzVhLTg0MDctNGQ5Ny04MjhjLWZmNGNiNDU1NzQxNiIsInV0aSI6InZxbzBEQXJtZWtpalVpVEtnOUZBQUEiLCJ2ZXIiOiIxLjAifQ.GoMyfYENDkBSTUqTlVojCrDwX89EyTetF4xIAo7DpKImKkExmUKj_V-nFhKnlqKeyVZpIfCXg2K_oWWIqkYzW--p-ZtO5ah2Q-nf5sc19fxN49Oy4ZaATA4NVW17NhikhVi1mF98iIYyVYZyvyJuZLLpr3e2haE5w_PV_l0eAJRE5Fi5tv5FzWpn7YtB-Aiv98ps8GmJEXmMIu9MrXa7bMkd_kt59LxKTajvgDTXufNQYMeVN7bz_JMkgQzaqHwIPYxw_qtJxbJZemKUMAaTlULFWoouLgAwZwbiwYbMVEYcDArpXs70wBCAs5Vjb99NDMYKl8t6yq0Pxd2Bii3s_Q"
+        echo -e "[DEFAULT]\nhost=https://adb-38248671556302.2.azuredatabricks.net\n\ntoken=${DATABRICKS_TOKEN}" >> ~/.databrickscfg
+        chmod 600  ~/.databrickscfg
+        cat  ~/.databrickscfg
+    - name: test
+      run: |
+        databricks workspace ls /
+    - name: Import Notebook
+      run: |
+        databricks workspace import_dir ./databricks/users/ ./databricks/users -o
+      env:
+        DATABRICKS_HOST: ${{ env.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ env.DATABRICKS_TOKEN }}

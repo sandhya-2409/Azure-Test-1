@@ -1,4 +1,4 @@
-name: Synapse release to UAT
+name: Synapse New
 
 on:
     workflow_dispatch:

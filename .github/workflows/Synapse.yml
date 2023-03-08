@@ -19,12 +19,12 @@ jobs:
         - uses: actions/checkout@v2
         - uses: azure/synapse-workspace-deployment@v1.6.0
           with:
-            clientId: ${{env.ARM_CLIENT_ID}}
-            clientSecret:  ${{env.ARM_CLIENT_SECRET}}
-            subscriptionId: ${{env.ARM_SUBSCRIPTION_ID}}
-            tenantId: ${{env.ARM_TENANT_ID}}
-            TargetWorkspaceName: ${{env.workspacename}}
-            resourceGroup: ${{env.workspacename}}
+            clientId: ${{secrets.ARM_CLIENT_ID}}
+            clientSecret:  ${{secrets.ARM_CLIENT_SECRET}}
+            subscriptionId: ${{secrets.ARM_SUBSCRIPTION_ID}}
+            tenantId: ${{secrets.ARM_TENANT_ID}}
+            TargetWorkspaceName: ${{secrets.workspacename}}
+            resourceGroup: ${{secrets.workspacename}}
             TemplateFile: './synw-testing-dev-001/TemplateForWorkspace.json'
             ParametersFile: './synw-testing-dev-001/TemplateParametersForWorkspace.json'
             OverrideArmParameters: ''

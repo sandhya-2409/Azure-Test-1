@@ -3,10 +3,10 @@ name: Synapse New
 on:
     workflow_dispatch:
 env:
-    subscriptionId: ${{secrets.SUBSCRIPTIONID}}
-    clientId: ${{secrets.CLIENTID}}
-    clientSecret:  ${{secrets.CLIENTSECRET}}
-    tenantId: ${{secrets.TENANTID}}
+    ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+    ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+    ARM_CLIENT_SECRET:  ${{secrets.ARM_CLIENT_SECRET}}
+    ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
     resourceGroup: 'rg-testing-uat-001'
     workspacename: 'synw-testing-uat-001'
     

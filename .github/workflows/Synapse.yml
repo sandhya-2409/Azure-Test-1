@@ -31,5 +31,4 @@ jobs:
             environment: 'Azure Public'
             DeleteArtifactsNotInTemplate: 'true'
             managedIdentity: 'False'
-            operation: 'deploy'
         

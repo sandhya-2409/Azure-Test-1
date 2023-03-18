@@ -26,7 +26,7 @@ jobs:
          az account set --subscription $ARM_SUBSCRIPTION_ID
     - name: Deploy Synapse Workspace
       run: |
-          az deployment group create --name synw-testing-uat-001 --resource-group rg-testing-uat-001  --template-file "./Synapse/TemplateForWorkspace.json"  --template-file "./Synapse/TemplateForWorkspace.json" --parameters  "./Synapse/TemplateParametersForWorkspace.json"  --mode Incremental  
+          az deployment group create --name synw-testing-uat-001 --resource-group rg-testing-uat-001  --template-file "./synw-testing-dev-001/TemplateForWorkspace.json" --parameters  "./synw-testing-dev-001/TemplateParametersForWorkspace.json"  --mode Incremental  --query "[].{Operation:properties.statusMessage, Resource:resourceName, ProvisioningState:properties.provisioningState}" --output table
            
            
      

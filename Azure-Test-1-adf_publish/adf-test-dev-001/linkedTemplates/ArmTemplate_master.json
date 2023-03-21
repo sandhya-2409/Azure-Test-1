@@ -5,7 +5,7 @@
 		"factoryName": {
 			"type": "string",
 			"metadata": "Data Factory name",
-			"defaultValue": "adf-test-dev-001"
+			"defaultValue": "adf-test-uat-001"
 		},
 		"containerUri": {
 			"type": "string",
@@ -21,7 +21,7 @@
 	},
 	"resources": [
 		{
-			"name": "adf-test-dev-001_ArmTemplate_0",
+			"name": "adf-test-uat-001_ArmTemplate_0",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2018-02-01",
 			"properties": {

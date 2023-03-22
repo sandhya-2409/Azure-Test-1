@@ -25,8 +25,8 @@ jobs:
             tenantId: ${{env.tenantId}}
             TargetWorkspaceName: ${{env.workspacename}}
             resourceGroup: ${{env.workspacename}}
-            TemplateFile: './synw-testing-dev-001/TemplateForWorkspace.json'
-            ParametersFile: './synw-testing-dev-001/TemplateParametersForWorkspace.json'
+            TemplateFile: './Azure-Test-1-workspace_publish/synw-testing-dev-001/TemplateForWorkspace.json'
+            ParametersFile: './Azure-Test-1-workspace_publish/synw-testing-dev-001/TemplateParametersForWorkspace.json'
             OverrideArmParameters: ''
             environment: 'UAT'
             DeleteArtifactsNotInTemplate: 'true'

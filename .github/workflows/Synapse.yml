@@ -31,3 +31,4 @@ jobs:
             environment: 'UAT'
             DeleteArtifactsNotInTemplate: 'true'
             managedIdentity: 'False'
+            operation: 'deploy'

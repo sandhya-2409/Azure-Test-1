@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-custstgacct--synw-testing-dev-001-testingdatalakedev001",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-dev-001/providers/Microsoft.Storage/storageAccounts/testingdatalakedev001",
+		"groupId": "dfs",
+		"fqdns": [
+			"testingdatalakedev001.dfs.core.windows.net"
+		]
+	}
+}

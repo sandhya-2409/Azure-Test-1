@@ -5,16 +5,16 @@
 		"workspaceName": {
 			"type": "string",
 			"metadata": "Workspace name",
-			"defaultValue": "synw-testing-dev-001"
+			"defaultValue": "synw-testing-uat-001"
 		},
-		"synw-testing-dev-001-WorkspaceDefaultSqlServer_connectionString": {
+		"synw-testing-uat-001-WorkspaceDefaultSqlServer_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'synw-testing-dev-001-WorkspaceDefaultSqlServer'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synw-testing-dev-001.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+			"metadata": "Secure string for 'connectionString' of 'synw-testing-uat-001-WorkspaceDefaultSqlServer'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synw-testing-uat-001.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"synw-testing-dev-001-WorkspaceDefaultStorage_properties_typeProperties_url": {
+		"synw-testing-uat-001-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://testingdatalakedev001.dfs.core.windows.net"
+			"defaultValue": "https://testingdatalakeuat001.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -47,7 +47,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/synw-testing-dev-001-WorkspaceDefaultSqlServer')]",
+			"name": "[concat(parameters('workspaceName'), '/synw-testing-uat-001-WorkspaceDefaultSqlServer')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -59,7 +59,7 @@
 				"annotations": [],
 				"type": "AzureSqlDW",
 				"typeProperties": {
-					"connectionString": "[parameters('synw-testing-dev-001-WorkspaceDefaultSqlServer_connectionString')]"
+					"connectionString": "[parameters('synw-testing-uat-001-WorkspaceDefaultSqlServer_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -71,14 +71,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/synw-testing-dev-001-WorkspaceDefaultStorage')]",
+			"name": "[concat(parameters('workspaceName'), '/synw-testing-uat-001-WorkspaceDefaultStorage')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('synw-testing-dev-001-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					"url": "[parameters('synw-testing-uat-001-WorkspaceDefaultStorage_properties_typeProperties_url')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -177,14 +177,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-custstgacct--synw-testing-dev-001-testingdatalakedev001')]",
+			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-custstgacct--synw-testing-uat-001-testingdatalakeuat001')]",
 			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
-				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-dev-001/providers/Microsoft.Storage/storageAccounts/testingdatalakedev001",
+				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-uat-001/providers/Microsoft.Storage/storageAccounts/testingdatalakeuat001",
 				"groupId": "dfs",
 				"fqdns": [
-					"testingdatalakedev001.dfs.core.windows.net"
+					"testingdatalakeuat001.dfs.core.windows.net"
 				]
 			},
 			"dependsOn": [
@@ -192,14 +192,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-sql--synw-testing-dev-001')]",
+			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-sql--synw-testing-uat-001')]",
 			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
-				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-dev-001/providers/Microsoft.Synapse/workspaces/synw-testing-dev-001",
+				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-uat-001/providers/Microsoft.Synapse/workspaces/synw-testing-uat-001",
 				"groupId": "sql",
 				"fqdns": [
-					"synw-testing-dev-001.61d3866e-2522-452c-8f40-47446c11b62f.sql.azuresynapse.net"
+					"synw-testing-uat-001.61d3866e-2522-452c-8f40-47446c11b62f.sql.azuresynapse.net"
 				]
 			},
 			"dependsOn": [
@@ -207,14 +207,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-sqlOnDemand--synw-testing-dev-001')]",
+			"name": "[concat(parameters('workspaceName'), '/default/synapse-ws-sqlOnDemand--synw-testing-uat-001')]",
 			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
-				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-dev-001/providers/Microsoft.Synapse/workspaces/synw-testing-dev-001",
+				"privateLinkResourceId": "/subscriptions/e43fe8bb-b4a2-42ca-be2c-b638d0253c4a/resourceGroups/rg-testing-uat-001/providers/Microsoft.Synapse/workspaces/synw-testing-uat-001",
 				"groupId": "sqlOnDemand",
 				"fqdns": [
-					"synw-testing-dev-001-ondemand.61d3866e-2522-452c-8f40-47446c11b62f.sql.azuresynapse.net"
+					"synw-testing-uat-001-ondemand.61d3866e-2522-452c-8f40-47446c11b62f.sql.azuresynapse.net"
 				]
 			},
 			"dependsOn": [

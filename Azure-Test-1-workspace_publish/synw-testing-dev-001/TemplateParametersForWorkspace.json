@@ -3,12 +3,12 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"workspaceName": {
-			"value": "synw-testing-dev-001"
+			"value": "synw-testing-uat-001"
 		},
-		"synw-testing-dev-001-WorkspaceDefaultSqlServer_connectionString": {
+		"synw-testing-uat-001-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synw-testing-dev-001.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"synw-testing-dev-001-WorkspaceDefaultStorage_properties_typeProperties_url": {
+		"synw-testing-uat-001-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://testingdatalakedev001.dfs.core.windows.net"
 		}
 	}
